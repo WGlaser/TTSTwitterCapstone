@@ -10,6 +10,25 @@
     
   </head>
   <body>
-    <div>HELLO WORLD</div>
+      <div class="container-fluid bg-light justify-content-center">
+    <div class="row">
+        <div class="span6" style="float: none; margin: 0 auto;">
+            <br/>
+            <h1 class="text-center">Twitter Search Query</h1>
+            <form th:action="@{/search}" th:object="${searchRequest}" method="post" 
+                  autocomplete="off" class="form-inline">
+                <div class="form-group">
+                    <input type="text" th:field="*{searchTerms}" 
+                           placeholder="Address" class="form-control"/>
+                </div>
+                <button class="btn btn-md btn-primary btn-block" 
+                            name="Submit" value="Submit" type="Submit">Find
+                </button>
+                
+            </form>
+            <br/>
+        </div>
+    </div>
+    </div>
     </body>
       
