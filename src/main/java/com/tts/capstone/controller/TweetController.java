@@ -51,13 +51,16 @@ public class TweetController {
             System.out.println("@" + status.getUser().getScreenName() + ":" + status.getText() );
             String profPic = status.getUser().get400x400ProfileImageURL();
             if(profPic !=null) {
-            	profPics.add(profPic);
+            	if(!profPics.contains(profPic)) {
+            		profPics.add(profPic);
+            	}
+            	 else {
+                 	profPics.add("no");
+                 }
             }
             else {
-            	profPics.add("localURL to no profile pic pic");
+            	profPics.add("no");
             }
-            
-            
             
 	}
 		for(String p: profPics) {
