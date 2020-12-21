@@ -3,6 +3,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.Collections;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -45,9 +46,14 @@ public class TweetController {
 		ArrayList<String> profPics = picsAndTweets[0];
 		ArrayList<String> tweets = picsAndTweets[1];
 		ArrayList<String> userNames = picsAndTweets[2];
+		ArrayList<String> shuffled = new ArrayList<String>(tweets);
+		Collections.shuffle(shuffled);		
 		model.addAttribute("profilePicArray", profPics);
 		model.addAttribute("tweetArray", tweets);
 		model.addAttribute("userNameArray", userNames);
+		model.addAttribute("shuffledTweets", shuffled);
+		
+		
 		return "index"; 
 		/*ArrayList<String> profPics = new ArrayList<String>();
 		Query query = new Query();
@@ -81,7 +87,14 @@ public class TweetController {
 		
 		
 		
+		
 	       
 }
+	
+	public  ArrayList<String> scrambleTweets(ArrayList<String> arr){
+		ArrayList<String> shuffled = arr;
+		Collections.shuffle(shuffled);
+		return shuffled;
+	}
 
 }

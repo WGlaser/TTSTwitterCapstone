@@ -6,18 +6,18 @@
           rel="stylesheet">
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js">
     </script>
-    <link rel="stylesheet" type="text/css" href="/custom.css"/>
+   <link rel="stylesheet" type="text/css" href="/custom.css"/>
     
   </head>
   <body>
       <div class="container-fluid bg-light justify-content-center">
-    <div class="row">
+      <div class="row">
         <div class="span6" style="float: none; margin: 0 auto;">
             <br/>
             <h1 class="text-center">Twitter Search Query</h1>
             <form th:action="@{/search}" th:object="${searchRequest}" method="post" 
                   autocomplete="off" class="form-inline">
-                <div class="form-group">
+                <div class="form-group" align="center">
                     <input type="text" th:field="*{searchTerms}" 
                            placeholder="Search Term" class="form-control"/>
                 </div>
@@ -30,21 +30,59 @@
         </div>
     </div>
     </div>
-    <div class="container">
+    <div class="card-group" th:if="${profilePicArray!=null and profilePicArray.size()>0}">  		
+    		    <div class="card" th:each="index : ${#numbers.sequence( 0, #arrays.length(profilePicArray)-1)}">
+    		    	<img th:src=${profilePicArray[index]} class="card-img-top">
+    		    	<div class="card-body">
+    		    		<h5 class = "card-title" th:text=${userNameArray[index]}></h5>
+    		    	</div>
+    		    </div>
+    </div>
+    <hr>
+    <div class="card-group" th:if="${profilePicArray!=null and profilePicArray.size()>0}">  		
+    		    <div class="card" th:each="index : ${#numbers.sequence( 0, #arrays.length(profilePicArray)-1)}">
+    		    	<div class="card-body">
+    		    	  <p class = "card-text" th:text="'Tweet# ' + ${index}"></p>
+    		    		<p class = "card-text" th:text=${shuffledTweets[index]}></p>
+    		    	</div>
+    		    </div>
+    </div>
+    
+    
+    </body>
+   <!--  <div class = container>
+      <div class="list-group">
     	<div class="row" th:if="${profilePicArray!=null and profilePicArray.size()>0}">
-    		<!--  <div class="col-md-3"th:each="profURL: ${profilePicArray}">-->
-    		<div class="col-md-3" th:each="index : ${#numbers.sequence( 0, #arrays.length(profilePicArray)-1)}">
-    		 <div class="card">
+    	
+    		<!--  <div class="col-md-3"th:each="profURL: ${profilePicArray}">
+    		<div class="d-flex w-100 justify-content-between" th:each="index : ${#numbers.sequence( 0, #arrays.length(profilePicArray)-1)}">
+    		 <div class="card border-primary mb-3 text-center list-group-item left-side" style=" height: auto ;width: 200px">
     		
-    		 	<img class="card-img=top" th:src=${profilePicArray[index]} style="width:100%;height:250px;object-fit:cover;" alt="Card image cap">
+    		 	<img class="card-img=top mx-auto d-block img-responsive" th:src=${profilePicArray[index]} style="width:100px;height:100px;object-fit:cover;" alt="Card image cap">
     		 	<div class="card-body">
-    		 		<h5 class="card-title" th:text=${userNameArray[index]}></h5>
+    		 		<p class="card-text" th:text=${userNameArray[index]}></p>
     		 	</div>
-    		
-    		
     		 </div>
     		</div>
+    		</div>
     	</div>
-    </div>
-    </body>
+   	
+   
+   	 <div class="row" th:if="${profilePicArray!=null and profilePicArray.size()>0}">
+    	
+    		<!--  <div class="col-md-3"th:each="profURL: ${profilePicArray}">
+    		<div class="d-flex w-100 justify-content-between" th:each="index : ${#numbers.sequence( 0, #arrays.length(profilePicArray)-1)}">
+    		 <div class="card border-primary mb-3 text-center list-group-item right-side"style=" height: auto ;width: 200px">
+    		
+    		 	<img class="card-img=top mx-auto d-block img-responsive" th:src=${profilePicArray[index]} style="width:100px;height:100px;object-fit:cover;" alt="Card image cap">
+    		 	<div class="card-body">
+    		 		<p class="card-text" th:text=${userNameArray[index]}></p>
+    		 	</div>
+    		 </div>
+    		</div>
+    		
+    	</div>
+   	 </div>
+   	 </div>
+    </body>-->
       

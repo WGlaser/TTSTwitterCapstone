@@ -1,0 +1,24 @@
+.container {
+  width: 75%;
+}
+
+.list-group-item.left-side,
+.list-group-item.right-side {
+  margin: 0 0 -1px;
+  float: left;
+  width: 50%;
+  border-bottom-width:0px;
+}
+
+.split-items .list-group-item.left-side{
+  border-top-right-radius:0px;
+  border-bottom-right-radius:0px;
+}
+
+.split-items .list-group-item.right-side{
+  border-top-left-radius:0px;
+  border-bottom-left-radius:0px;
+  border-bottom-right-radius:0px;
+  border-top-right-radius:4px;
+  border-left: 0;
+}

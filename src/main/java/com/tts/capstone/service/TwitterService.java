@@ -1,6 +1,7 @@
 package com.tts.capstone.service;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -36,7 +37,7 @@ public class TwitterService {
 			if(profPics.size()==5) {
 				break;
 			}
-            System.out.println("@" + status.getUser().getScreenName() + ":" + status.getText() );
+         //   System.out.println("@" + status.getUser().getScreenName() + ":" + status.getText() );
             String profPic = status.getUser().get400x400ProfileImageURL();
             tweets.add(status.getText());
             userNames.add(status.getUser().getScreenName());
@@ -53,11 +54,13 @@ public class TwitterService {
             }
             
 		}
+		
 		picsAndTweetsAndNames[0]= profPics;
 		picsAndTweetsAndNames[1] = tweets;
 		picsAndTweetsAndNames[2] = userNames;
 		return picsAndTweetsAndNames;
 	}
+	
 	
 	
 	
