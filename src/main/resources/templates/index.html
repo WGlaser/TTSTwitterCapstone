@@ -19,7 +19,7 @@
                   autocomplete="off" class="form-inline">
                 <div class="form-group">
                     <input type="text" th:field="*{searchTerms}" 
-                           placeholder="Address" class="form-control"/>
+                           placeholder="Search Term" class="form-control"/>
                 </div>
                 <button class="btn btn-md btn-primary btn-block" 
                             name="Submit" value="Submit" type="Submit">Find
@@ -32,14 +32,16 @@
     </div>
     <div class="container">
     	<div class="row" th:if="${profilePicArray!=null and profilePicArray.size()>0}">
-    		<div class="col-md-3"th:each="profURL: ${profilePicArray}">
+    		<!--  <div class="col-md-3"th:each="profURL: ${profilePicArray}">-->
+    		<div class="col-md-3" th:each="index : ${#numbers.sequence( 0, #arrays.length(profilePicArray)-1)}">
     		 <div class="card">
-    		 <div th:if="${profURL}">
-    		 	<img class="card-img=top" th:src=${profURL} style="width:100%;height:250px;object-fit:cover;" alt="Card image cap">
-    		 </div>
-    		 <div th:unless="${profURL}">
-    		 <img class="card-img=top" th:src="@{/img/noProfPic.png}" style="width:100%;height:250px;object-fit:cover;" alt="Card image cap">
-    		 </div>
+    		
+    		 	<img class="card-img=top" th:src=${profilePicArray[index]} style="width:100%;height:250px;object-fit:cover;" alt="Card image cap">
+    		 	<div class="card-body">
+    		 		<h5 class="card-title" th:text=${userNameArray[index]}></h5>
+    		 	</div>
+    		
+    		
     		 </div>
     		</div>
     	</div>
