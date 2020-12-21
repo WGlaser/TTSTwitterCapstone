@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import com.tts.capstone.model.SearchRequest;
+import com.tts.capstone.service.TwitterService;
 
 import twitter4j.Query;
 import twitter4j.QueryResult;
@@ -28,6 +29,9 @@ public class TweetController {
 	@Autowired 
 	private Twitter twitter;
 	
+	@Autowired
+	private TwitterService twitterService;
+	
 	@GetMapping("/")
     public String getMainPage(Model model){
 		SearchRequest searchRequest= new SearchRequest();
@@ -37,7 +41,8 @@ public class TweetController {
 	
 	@PostMapping("/search")
 	public String getSearchResults(Model model, SearchRequest searchRequest) {
-		ArrayList<String> profPics = new ArrayList<String>();
+		ArrayList<String> profPics = twitterService.getProfPics(searchRequest);
+		/*ArrayList<String> profPics = new ArrayList<String>();
 		Query query = new Query();
 		query.query(searchRequest.getSearchTerms());
 		QueryResult result = null;
@@ -65,7 +70,7 @@ public class TweetController {
 	}
 		for(String p: profPics) {
 			System.out.println(p);
-		}
+		}*/
 		model.addAttribute("profilePicArray", profPics);
 		return "index"; 
 		
