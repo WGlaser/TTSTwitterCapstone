@@ -19,9 +19,10 @@ public class TwitterService {
 	private Twitter twitter;
 	
 	public ArrayList<String>[] getProfPics(SearchRequest searchRequest){
-		
+		ArrayList<String>[] picsAndTweetsAndNames = new ArrayList[3];
 		ArrayList<String> profPics = new ArrayList<String>();
 		ArrayList<String> tweets = new ArrayList<String>();
+		ArrayList<String> userNames = new ArrayList<String>();
 		Query query = new Query();
 		query.query(searchRequest.getSearchTerms());
 		QueryResult result = null;
@@ -32,9 +33,13 @@ public class TwitterService {
 			e.printStackTrace();
 		}
 		for (Status status : result.getTweets()) {
+			if(profPics.size()==5) {
+				break;
+			}
             System.out.println("@" + status.getUser().getScreenName() + ":" + status.getText() );
             String profPic = status.getUser().get400x400ProfileImageURL();
-            
+            tweets.add(status.getText());
+            userNames.add(status.getUser().getScreenName());
             if(profPic !=null) {
             	if(!profPics.contains(profPic)) {
             		profPics.add(profPic);
@@ -47,11 +52,11 @@ public class TwitterService {
             	profPics.add("no");
             }
             
-	}
-		for(String p: profPics) {
-			System.out.println(p);
 		}
-		return profPics;
+		picsAndTweetsAndNames[0]= profPics;
+		picsAndTweetsAndNames[1] = tweets;
+		picsAndTweetsAndNames[2] = userNames;
+		return picsAndTweetsAndNames;
 	}
 	
 	

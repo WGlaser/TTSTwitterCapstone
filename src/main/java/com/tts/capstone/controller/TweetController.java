@@ -41,7 +41,14 @@ public class TweetController {
 	
 	@PostMapping("/search")
 	public String getSearchResults(Model model, SearchRequest searchRequest) {
-		ArrayList<String> profPics = twitterService.getProfPics(searchRequest);
+		ArrayList<String>[] picsAndTweets = twitterService.getProfPics(searchRequest);
+		ArrayList<String> profPics = picsAndTweets[0];
+		ArrayList<String> tweets = picsAndTweets[1];
+		ArrayList<String> userNames = picsAndTweets[2];
+		model.addAttribute("profilePicArray", profPics);
+		model.addAttribute("tweetArray", tweets);
+		model.addAttribute("userNameArray", userNames);
+		return "index"; 
 		/*ArrayList<String> profPics = new ArrayList<String>();
 		Query query = new Query();
 		query.query(searchRequest.getSearchTerms());
@@ -71,8 +78,7 @@ public class TweetController {
 		for(String p: profPics) {
 			System.out.println(p);
 		}*/
-		model.addAttribute("profilePicArray", profPics);
-		return "index"; 
+		
 		
 		
 	       
