@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.tts.capstone.model.SearchRequest;
 import com.tts.capstone.service.TwitterService;
@@ -33,6 +34,11 @@ public class TweetController {
 	@Autowired
 	private TwitterService twitterService;
 	
+	private ArrayList<String> profPics;
+	private ArrayList<String> tweets;
+	private ArrayList<String> userNames;
+	private ArrayList<String> shuffled;
+	
 	@GetMapping("/")
     public String getMainPage(Model model){
 		SearchRequest searchRequest= new SearchRequest();
@@ -43,10 +49,10 @@ public class TweetController {
 	@PostMapping("/search")
 	public String getSearchResults(Model model, SearchRequest searchRequest) {
 		ArrayList<String>[] picsAndTweets = twitterService.getProfPics(searchRequest);
-		ArrayList<String> profPics = picsAndTweets[0];
-		ArrayList<String> tweets = picsAndTweets[1];
-		ArrayList<String> userNames = picsAndTweets[2];
-		ArrayList<String> shuffled = new ArrayList<String>(tweets);
+		profPics = picsAndTweets[0];
+		tweets = picsAndTweets[1];
+		userNames = picsAndTweets[2];
+		shuffled = new ArrayList<String>(tweets);
 		Collections.shuffle(shuffled);		
 		model.addAttribute("profilePicArray", profPics);
 		model.addAttribute("tweetArray", tweets);
@@ -54,47 +60,37 @@ public class TweetController {
 		model.addAttribute("shuffledTweets", shuffled);
 		
 		
-		return "index"; 
-		/*ArrayList<String> profPics = new ArrayList<String>();
-		Query query = new Query();
-		query.query(searchRequest.getSearchTerms());
-		QueryResult result = null;
-		try {
-			result = twitter.search(query);
-		} catch (TwitterException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		for (Status status : result.getTweets()) {
-            System.out.println("@" + status.getUser().getScreenName() + ":" + status.getText() );
-            String profPic = status.getUser().get400x400ProfileImageURL();
-            if(profPic !=null) {
-            	if(!profPics.contains(profPic)) {
-            		profPics.add(profPic);
-            	}
-            	 else {
-                 	profPics.add("no");
-                 }
-            }
-            else {
-            	profPics.add("no");
-            }
-            
-	}
-		for(String p: profPics) {
-			System.out.println(p);
-		}*/
-		
-		
-		
-		
+		return "index"; 	
 	       
 }
 	
-	public  ArrayList<String> scrambleTweets(ArrayList<String> arr){
-		ArrayList<String> shuffled = arr;
-		Collections.shuffle(shuffled);
-		return shuffled;
+	@PostMapping("/checkQuiz")
+	public String checkQuiz(@RequestParam(value="guessNum", required=false) String guessNum, Model model) {
+		String[] guesses = guessNum.split(",");
+		System.out.println("Original Tweets in order:");
+		for(String s : this.tweets) {
+			System.out.println(s);
+		}
+		System.out.println("Shuffled Tweets on page:");
+		for(String r : this.shuffled) {
+			System.out.println(r);
+		}
+		
+		ArrayList<String> guessesAsStrings = new ArrayList<String>();
+		for(String s: guesses) {
+			int i = Integer.parseInt(s);
+			i = i-1; //to make sure we actually look at 0-4, not 1-5
+			String t = shuffled.get(i);
+			guessesAsStrings.add(t);
+		}
+		int numCorrect = 0;
+		for(int i = 0; i<guessesAsStrings.size(); i++) {
+			if(tweets.get(i).equals(guessesAsStrings.get(i))){
+				numCorrect++;
+			}
+		}
+		model.addAttribute("numCorrect", numCorrect);
+		return "checkQuiz";
 	}
-
+	
 }
