@@ -14,10 +14,10 @@
       <div class="row">
         <div class="span6" style="float: none; margin: 0 auto;">
             <br/>
-            <h1 class="text-center">Twitter Search Query</h1>
+            <h1 class="text-center">Guess who tweeted what!</h1>
             <form th:action="@{/search}" th:object="${searchRequest}" method="post" 
-                  autocomplete="off" class="form-inline">
-                <div class="form-group" align="center">
+                  autocomplete="off">
+                <div class="form-group row">
                     <input type="text" th:field="*{searchTerms}" 
                            placeholder="Search Term" class="form-control"/>
                 </div>
@@ -30,24 +30,31 @@
         </div>
     </div>
     </div>
-    <div class="card-group" th:if="${profilePicArray!=null and profilePicArray.size()>0}">  		
-    		    <div class="card" th:each="index : ${#numbers.sequence( 0, #arrays.length(profilePicArray)-1)}">
+    <div class="scrolling-wrapper row flex-row flex-nowrap mt-4 pb-4" id="main" th:if="${profilePicArray!=null and profilePicArray.size()>0}">  		
+    		    <div class="col-md-5ths" th:each="index : ${#numbers.sequence( 0, #arrays.length(profilePicArray)-1)}">
+    		         <div class="card">
     		    	<img th:src=${profilePicArray[index]} class="card-img-top">
     		    	<div class="card-body">
     		    		<h5 class = "card-title" th:text=${userNameArray[index]}></h5>
     		    	</div>
-    		    </div>
-    </div>
-     <div class="card-group" th:if="${profilePicArray!=null and profilePicArray.size()>0}">
-     			<form class="form-inline" th:action="@{checkQuiz}" method = "post">	
-    		    <div class="card" th:each="index : ${#numbers.sequence( 0, #arrays.length(profilePicArray)-1)}">
-    		    	<div class="card-body">
-    		    	  
-    		    		<input type="text" name="guessNum" th:value = "${guessNum}" th:placeholder="'Enter Tweet# for:' + ${userNameArray[index]}" class ="form-control"/>
-    		    	  
     		    	</div>
     		    </div>
+    </div>
+     <div class="scrolling-wrapper row flex-row flex-nowrap mt-4 pb-4" id="main" th:if="${profilePicArray!=null and profilePicArray.size()>0}">
+     			<form class="form-inline" th:action="@{checkQuiz}" method = "post">	
+    		    <div class="col-md-5ths" th:each="index : ${#numbers.sequence( 0, #arrays.length(profilePicArray)-1)}">
+    		    		<div class="card">
+    		      		<input type="number" name="guessNum" th:value = "${guessNum}" class ="form-control" min="1" max="5"/>
+    		      		<div class="card-body">
+    		    		     <h5 class = "card-title" th:text=${userNameArray[index]}></h5>
+    		    	    </div>
+    		    		<!-- th:placeholder="'Enter Tweet# for:' + ${userNameArray[index]}"  -->
+    		   			</div>
+    		    </div>
+    		    <br/>
+    		    <div>
     		     <button type="submit" class="btn btn-primary">See how you did</button>
+    		    </div>
     		    </form>
     </div>
     <hr>
