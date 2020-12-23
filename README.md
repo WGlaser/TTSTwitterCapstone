@@ -10,4 +10,8 @@ To put together 8 weeks of material into one final project utilizing an unknown 
 [Thymeleaf](https://www.thymeleaf.org/) Java template engine.  
 [Spring + Spring Boot](https://spring.io/projects/spring-boot) framework.
 
+##Screenshots
+Below is the initial screen after inputting a query. You are presented with 5 users and 5 randomized tweets numbered 1-5 for you to match to the users. 
+![Image 1](https://github.com/WGlaser/TTSTwitterCapstone/blob/master/Readme1.jpgraw=true)
+
 
