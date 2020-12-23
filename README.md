@@ -11,8 +11,8 @@ To put together 8 weeks of material into one final project utilizing an unknown 
 [Spring + Spring Boot](https://spring.io/projects/spring-boot) framework.
 
 ## Screenshots
-Below is the initial screen after inputting a query. You are presented with 5 users and 5 randomized tweets numbered 1-5 for you to match to the users. 
-<img src="https://github.com/WGlaser/TTSTwitterCapstone/blob/master/Readme1.jpg" width=50% height=50%>
+Below is the initial screen after inputting a query. You are presented with 5 users and 5 randomized tweets numbered 1-5 for you to match to the users.   
+<img src="https://github.com/WGlaser/TTSTwitterCapstone/blob/master/Readme1.jpg" width=50% height=50%>. 
 
 After clicking "See how you did", the code will check the shuffled tweet numbers vs the actual tweet numbers, and tally your score. The tweets will also rearrange below their respective tweeters and color code your responses.
 <img src="https://github.com/WGlaser/TTSTwitterCapstone/blob/master/Readme2.jpg" width=50% height=50%>
