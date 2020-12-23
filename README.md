@@ -18,6 +18,9 @@ After clicking "See how you did", the code will check the shuffled tweet numbers
 
 <img src="https://github.com/WGlaser/TTSTwitterCapstone/blob/master/Readme2.jpg" width=50% height=50%>
 
-
+## Future updates
+- Fix HTML to adjust properly with varying window sizes/devices
+- Include a difficulty setting to adjust number of users/tweets to match
+- Add a "Tweet my results!" button to tweet from user's account.
 
 
