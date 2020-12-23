@@ -25,7 +25,7 @@ public class TwitterService {
 		ArrayList<String> tweets = new ArrayList<String>();
 		ArrayList<String> userNames = new ArrayList<String>();
 		Query query = new Query();
-		query.query(searchRequest.getSearchTerms());
+		query.query(searchRequest.getSearchTerms()+ "+exclude:retweets");
 		QueryResult result = null;
 		try {
 			result = twitter.search(query);

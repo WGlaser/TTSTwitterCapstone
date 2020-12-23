@@ -67,6 +67,7 @@ public class TweetController {
 	@PostMapping("/checkQuiz")
 	public String checkQuiz(@RequestParam(value="guessNum", required=false) String guessNum, Model model) {
 		String[] guesses = guessNum.split(",");
+		ArrayList<Boolean> tfValues = new ArrayList<Boolean>();
 		System.out.println("Original Tweets in order:");
 		for(String s : this.tweets) {
 			System.out.println(s);
@@ -86,10 +87,21 @@ public class TweetController {
 		int numCorrect = 0;
 		for(int i = 0; i<guessesAsStrings.size(); i++) {
 			if(tweets.get(i).equals(guessesAsStrings.get(i))){
+				tfValues.add(true);
 				numCorrect++;
 			}
+			else {
+				tfValues.add(false);
+			}
 		}
+		model.addAttribute("tfvalues", tfValues);
 		model.addAttribute("numCorrect", numCorrect);
+		model.addAttribute("guesses", guesses);
+		model.addAttribute("profilePicArray", profPics);
+		model.addAttribute("tweetArray", tweets);
+		model.addAttribute("userNameArray", userNames);
+		model.addAttribute("shuffledTweets", shuffled);
+		
 		return "checkQuiz";
 	}
 	

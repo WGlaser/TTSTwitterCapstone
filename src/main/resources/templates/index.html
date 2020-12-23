@@ -44,7 +44,7 @@
      			<form class="form-row row-eq-height" th:action="@{checkQuiz}" method = "post">	
     		    <div class="col-md-5ths" th:each="index : ${#numbers.sequence( 0, #arrays.length(profilePicArray)-1)}">
     		    		<div class="card h-100">
-    		      		<input type="number"  name="guessNum" th:value = "${guessNum}" class ="form-control" th:placeholder="'Enter Tweet# for:' + ${userNameArray[index]}" min="1" max = "5"/>
+    		      		<input type="number" name="guessNum" th:value = "${guessNum}" class ="form-control" th:placeholder="'Enter Tweet# for:' + ${userNameArray[index]}" min="1" max = "5"/>
     		      		<!--  <div class="card-body">
     		    		     <p class = "card-title" th:text=${userNameArray[index]}></p>
     		    	    </div>-->
@@ -60,7 +60,7 @@
     		    </form>
     </div>
     <hr>
-    <div class="card-group" th:if="${profilePicArray!=null and profilePicArray.size()>0}">  		
+    <div class="card-group" style="margin: 10px" th:if="${profilePicArray!=null and profilePicArray.size()>0}">  		
     		    <div class="card" th:each="index : ${#numbers.sequence( 0, #arrays.length(profilePicArray)-1)}">
     		    	<div class="card-body">
     		    	  <p class = "card-text" th:text="'Tweet# ' + ${index+1}"></p>

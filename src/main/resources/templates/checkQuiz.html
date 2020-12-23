@@ -9,9 +9,40 @@
    <link rel="stylesheet" type="text/css" href="/custom.css"/>
     
   </head>
-  
   <body>
-  <h1>NUM CORRECT:</h1>
-  <h2 th:text="${numCorrect}"></h2>
-  
-  </body>
+      <div class="container-fluid bg-light justify-content-center">
+      <div class="row">
+        <div class="span6" style="float: none; margin: 0 auto;">
+            <br/>
+            <h1 class="text-center">Results!</h1>
+            <br/>
+        </div>
+    </div>
+    </div>
+    <div class="row row-eq-height" style="margin: 10px" th:if="${profilePicArray!=null and profilePicArray.size()>0}">  		
+    		    <div class="col-md-5ths" th:each="index : ${#numbers.sequence( 0, #arrays.length(profilePicArray)-1)}">
+    		         <div class="card" th:classappend="${tfvalues[index]} ?  bg-success: bg-danger">
+    		    	<img th:src=${profilePicArray[index]} class="card-img-top">
+    		    	<div class="card-body">
+    		    		<h5 class = "card-title" th:text=${userNameArray[index]}></h5>
+    		    		<p class="card-text" th:text="'Your Guess: '+ ${guesses[index]}"></p>
+    		    		<p class="card-text" th:if="${tfvalues[index]}">Good job!</p>
+    		    	    <p class="card-text" th:unless="${tfvalues[index]}">Nice try:(</span>
+    		    	</div>
+    		    	</div>
+    		    </div>
+    </div>
+     	<br/>
+            <h3 class="text-center">Actual Tweets:</h3>
+            <br/>
+    <div class="card-group" style="margin: 10px" th:if="${profilePicArray!=null and profilePicArray.size()>0}">  		
+    		    <div class="card" th:each="index : ${#numbers.sequence( 0, #arrays.length(profilePicArray)-1)}">
+    		    	<div class="card-body">
+    		    	  <p class = "card-text" th:text="'Tweet# ' + ${shuffledTweets.indexOf(tweetArray[index])+1}"></p>
+    		    		<p class = "card-text" th:text=${tweetArray[index]}></p>
+    		    	</div>
+    		    </div>
+    </div>
+    
+    
+    </body>
